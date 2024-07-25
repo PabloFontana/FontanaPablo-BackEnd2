@@ -1,0 +1,92 @@
+[
+    {
+        "id": 1,
+        "title": "Camiseta deportiva",
+        "description": "Camiseta transpirable ideal para entrenamientos intensos.",
+        "price": 29.99,
+        "img": "sin imagen",
+        "code": "CDP001",
+        "stock": 50
+    },
+    {
+        "id": 2,
+        "title": "Pantalón deportivo",
+        "description": "Pantalón ajustado para mayor comodidad durante el ejercicio.",
+        "price": 39.95,
+        "img": "sin imagen",
+        "code": "PDP002",
+        "stock": 40
+    },
+    {
+        "id": 3,
+        "title": "Zapatillas running",
+        "description": "Zapatillas diseñadas para corredores, con amortiguación avanzada.",
+        "price": 89.99,
+        "img": "sin imagen",
+        "code": "ZDR003",
+        "stock": 30
+    },
+    {
+        "id": 4,
+        "title": "Calcetines deportivos",
+        "description": "Calcetines de alto rendimiento, ideales para cualquier actividad deportiva.",
+        "price": 9.99,
+        "img": "sin imagen",
+        "code": "CDD004",
+        "stock": 100
+    },
+    {
+        "id": 5,
+        "title": "Shorts de entrenamiento",
+        "description": "Shorts ligeros y flexibles para movimientos sin restricciones.",
+        "price": 24.95,
+        "img": "sin imagen",
+        "code": "SET005",
+        "stock": 35
+    },
+    {
+        "id": 6,
+        "title": "Top deportivo",
+        "description": "Top ajustado para soporte máximo durante actividades de alta intensidad.",
+        "price": 19.99,
+        "img": "sin imagen",
+        "code": "TDP006",
+        "stock": 45
+    },
+    {
+        "id": 7,
+        "title": "Chaqueta cortavientos",
+        "description": "Chaqueta ligera que protege del viento y la lluvia ligera.",
+        "price": 49.99,
+        "img": "sin imagen",
+        "code": "CCL007",
+        "stock": 25
+    },
+    {
+        "id": 8,
+        "title": "Mallas deportivas",
+        "description": "Mallas ajustadas con tecnología que favorece la transpiración.",
+        "price": 34.95,
+        "img": "sin imagen",
+        "code": "MDT008",
+        "stock": 20
+    },
+    {
+        "id": 9,
+        "title": "Sudadera con capucha",
+        "description": "Sudadera cómoda y cálida, perfecta para el calentamiento antes de entrenar.",
+        "price": 54.99,
+        "img": "sin imagen",
+        "code": "SCC009",
+        "stock": 15
+    },
+    {
+        "id": 10,
+        "title": "Gorra deportiva",
+        "description": "Gorra ligera con diseño transpirable para proteger del sol durante actividades al aire libre.",
+        "price": 14.99,
+        "img": "sin imagen",
+        "code": "GDP010",
+        "stock": 50
+    }
+]
