@@ -53,4 +53,21 @@ class CartManager {
             
         }
     }
+
+    async addProductsCart(cartId, productsId, quantity = 1 ){
+        const cart = await this.getCartById(cartId);
+        const existProduct = cart.products.find( p => p.product === productsId);
+        //verifico si el produco deseado ya existe dentro del carrito
+
+        if(existProduct){
+            existProduct.quantity += quantity;
+        }else{
+            cart.products.push({product: productsId, quantity});
+
+        }
+        await this.guardarCarrito();
+        return cart;
+    }
 }
+
+module.exports = CartManager;
