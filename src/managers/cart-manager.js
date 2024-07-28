@@ -11,42 +11,43 @@ class CartManager {
 
     async cargarCarritos(){
         try {
-            const data= await fs.readFile(this.path, "utf-8");
+            const data = await fs.readFile(this.path, "utf-8");
             this.carts = JSON.parse(data);
             if( this.carts.length > 0 ){
-                this.ultId = Math.max(...this.carts.map(cart = cart.id));
+                this.ultId = Math.max(...this.carts.map(cart => cart.id));
                 //... para poder traer el array de los carritos, mapeo que solo retorne id
             
             }
         } catch (error) {
-            console.log('Error al cargar el carrito');
-            await this.guardarCarrito();
+            console.log("Error al cargar el carrito");
+            await this.guardarCarritos();
         }
     }
-    async guardarCarrito(){
-        await fs.writeFile(this.path , JSON.stringify(this.carts, null , 2));
-
+    
+    async guardarCarritos(){
+        await fs.writeFile(this.path, JSON.stringify(this.carts, null, 2));
     }
+    
 
     //crear un carrito
-    async createCart (){
-        const newCart = {
+    async crearCarrito (){
+        const nuevoCarrito  = {
             id: ++this.ultId,
             products: []
         };
-        this.carts.push(newCart);
+        this.carts.push(nuevoCarrito);
 
-        await this.guardarCarrito();
-        return newCart ;
+        await this.guardarCarritos();
+        return nuevoCarrito ;
     }
 
-    async getCartById(cartId){
+    async getCartById(carritoId){
         try {   
-            const cartSearch = this.carts.find(cart => cart.id === cartId);
-            if( !cartSearch ) {
+            const carritoBuscado = this.carts.find(carrito  => carrito.id === carritoId);
+            if( !carritoBuscado ) {
                 console.log("No se encuentra el carrito con ese id");
             }
-            return cartSearch;
+            return carritoBuscado;
             
         } catch (error) {
             console.log('Error al buscar el carrito por id, intente de nuevo');
@@ -54,19 +55,19 @@ class CartManager {
         }
     }
 
-    async addProductsCart(cartId, productsId, quantity = 1 ){
-        const cart = await this.getCartById(cartId);
-        const existProduct = cart.products.find( p => p.product === productsId);
+    async addProductsCart(carritoId, productoId, quantity = 1 ){
+        const carrito  = await this.getCartById(carritoId);
+        const existeProducto  = carrito.products.find( p => p.product === productoId);
         //verifico si el produco deseado ya existe dentro del carrito
 
-        if(existProduct){
-            existProduct.quantity += quantity;
+        if(existeProducto ){
+            existeProducto.quantity += quantity;
         }else{
-            cart.products.push({product: productsId, quantity});
+            carrito.products.push({product: productoId, quantity});
 
         }
-        await this.guardarCarrito();
-        return cart;
+        await this.guardarCarritos();
+        return carrito;
     }
 }
 
