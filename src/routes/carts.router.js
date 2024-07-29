@@ -25,4 +25,18 @@ router.get("/:cid" , async (req, res) =>{
 })
 
 
+//agergar productos al carrito
+router.post("/:cid/product/:pid" , async (req, res) =>{
+    const carritoId = parseInt(req.params.cid);
+    const productoId = req.params.pid;
+    const quantity = req.body.quantity || 1 ; 
+
+    try {
+        const carritoNew = await cartManager.addProductsCart(carritoId, productoId, quantity);
+        res.json(carritoNew.products);
+        
+    } catch (error) {
+        res.status(500).send("Error al ingresar un producto, error del servidor")
+    }
+})
 module.exports = router; 
