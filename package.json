@@ -8,9 +8,10 @@
   "author": "Fontana Pablo",
   "license": "ISC",
   "keywords": [],
-  "description": "",
+  "description": "Pre-entrega numero 1 de Programación Backend I: Desarrollo Avanzado de Backend.",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "express-handlebars": "^8.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"

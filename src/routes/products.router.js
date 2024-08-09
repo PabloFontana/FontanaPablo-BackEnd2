@@ -1,7 +1,7 @@
-const express = require("express");
-const ProductManager = require("../managers/product-manager.js");
+const express = require("express"); 
+const router = express.Router(); 
+const ProductManager = require("../managers/product-manager.js"); 
 const manager = new ProductManager("./src/data/productos.json");
-const router = express.Router();
 
 
 router.get("/", async (req, res) => {

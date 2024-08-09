@@ -2,21 +2,12 @@ const fs = require("fs").promises;
 
 
 class ProductManager {
+    
     static ultId = 0;
 
     constructor(path) {
         this.products = [];
         this.path = path;
-
-        this.cargarArray(); 
-    }
-
-    async cargarArray() {
-        try {
-            this.products = await this.leerArchivo();
-        } catch (error) {
-            console.log("Error al inicializar ProductManager");
-        }
     }
 
     async addProduct({ title, description, price, img, code, stock }) {
@@ -27,11 +18,12 @@ class ProductManager {
         }
 
         
-
+        
         if (this.products.some(item => item.code === code)) {
-            console.log("El codigo debe ser unico.. ");
+            console.log("El codigo debe ser unico.");
             return;
         }
+        
 
         const lastProductId = this.products.length > 0 ? this.products[this.products.length - 1].id : 0;
         const nuevoProducto = {
@@ -60,7 +52,7 @@ class ProductManager {
         }
 
     }
-
+    
     async getProductById(id) {
         try {
             const arrayProductos = await this.leerArchivo();
@@ -79,11 +71,13 @@ class ProductManager {
     }
 
     //auxiliares: 
+
     async leerArchivo() {
         const respuesta = await fs.readFile(this.path, "utf-8");
         const arrayProductos = JSON.parse(respuesta);
         return arrayProductos;
     }
+
 
     async guardarArchivo(arrayProductos) {
         await fs.writeFile(this.path, JSON.stringify(arrayProductos, null, 2));
@@ -108,6 +102,8 @@ class ProductManager {
             console.log("Tenemos un error al actualizar productos"); 
         }
     }
+
+    
 
     async deleteProduct(id) {
         try {
