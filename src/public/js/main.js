@@ -9,6 +9,26 @@ socket.on("productos",(data)=>{
     renderProductos(data);
 });
 
+//que el fomrulario solo acepete numeros en price
+function validatePriceInput(event) {
+    const input = event.target;
+    const value = input.value;
+    const validValue = value.match(/^\d*\.?\d*$/);
+
+    if (!validValue) {
+        alert('Por favor, ingrese un numero');
+        input.value = '';
+    }
+}
+
+
+
+
+
+
+
+
+
 
 const renderProductos=(productos)=>{
     const contenedorProductos = document.getElementById("contenedorProductos");
@@ -36,3 +56,4 @@ const renderProductos=(productos)=>{
 const eliminarProducto=(id)=>{
     socket.emit("eliminarProducto", id);
 }
+
