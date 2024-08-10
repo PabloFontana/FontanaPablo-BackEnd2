@@ -8,7 +8,13 @@ router.get("/productos", async (req,res)=>{
     const productos = await manager.getProducts();
     
 
-    res.render("index", { productos });
+    res.render("home", { productos });
+});
+ 
+
+//tiempo real para realtimeproducts
+router.get("/realTimeProducts", (req, res) =>{
+    res.render("realTimeProducts");
 });
 
 
