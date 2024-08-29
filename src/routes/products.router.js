@@ -4,7 +4,12 @@ const ProductManager = require("../managers/product-manager.js");
 const manager = new ProductManager("./src/data/productos.json");
 
 
-router.get("/", async (req, res) => {
+//model de prodcuts con mongoose
+
+const ProductsModel = require("../models/products.model.js");
+
+
+/* router.get("/", async (req, res) => {
     const limit = req.query.limit;
     try {
         const arrayProductos = await manager.getProducts();
@@ -16,7 +21,20 @@ router.get("/", async (req, res) => {
     } catch (error) {
         res.status(500).send("Error interno del servidor");
     }
-})
+}) */
+
+
+router.get("/", async (req, res)=> {
+    try {
+        const arrayProducts = await ProductsModel.find()
+        res.json(arrayProducts);
+    } catch (error) {
+        res.status(500).json({message: "No era tan facil"});
+    }
+    
+
+});
+
 
 //Busqueda de producto por ID
 
@@ -42,12 +60,43 @@ router.post("/", async (req, res) => {
     const nuevoProducto = req.body;
     
     try {
-        await manager.addProduct(nuevoProducto); 
+        const product = new ProductsModel(nuevoProducto);
+        await product.save();
 
-        res.status(201).send("Producto agregado exitosamente"); 
+        res.send({message: "Producto agregado existosamente", producto: product}) 
+        
     } catch (error) {
         res.status(500).json({status: "error", message: error.message});
     }
 })
 
+router.put("/:id", async (req,res)=>{
+    try {
+        const product = await ProductsModel.findByIdAndUpdate(req.params.id, req.body);
+        if(!product){
+            return res.status(404).send("El producto no fue encontrado")
+        }
+        res.status(201).send({message: "Producto actualizado correctamente"})
+    } catch (error) {
+        res.status(500).send("Error del servidor");
+        
+    }
+})
+
+//eliminar user desde postman
+router.delete("/:id", async (req,res)=>{
+
+    try {
+        const producto = await ProductsModel.findByIdAndDelete(req.params.id)
+        if(!producto){
+            return res.status(404).send("El producto no fue encontrado")
+        }
+        res.send("Producto eliminado!")
+    } catch (error) {
+        res.status(500).send("Error del servidor");
+    }
+})
+
+
 module.exports = router; 
+

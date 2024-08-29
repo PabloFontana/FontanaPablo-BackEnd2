@@ -11,7 +11,6 @@ class ProductManager {
     }
 
     async addProduct({ title, description, price, img, code, stock }) {
-
         if (!title || !description || !price || !img || !code || !stock) {
             console.log("Todos los campos son obligatorios");
             return;
@@ -41,7 +40,11 @@ class ProductManager {
 
         
         await this.guardarArchivo(this.products);
-    }
+    } 
+
+
+
+
 
     async getProducts() {
         try {

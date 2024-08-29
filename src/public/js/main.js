@@ -21,15 +21,6 @@ function validatePriceInput(event) {
     }
 }
 
-
-
-
-
-
-
-
-
-
 const renderProductos=(productos)=>{
     const contenedorProductos = document.getElementById("contenedorProductos");
     contenedorProductos.innerHTML="";
@@ -55,5 +46,4 @@ const renderProductos=(productos)=>{
 
 const eliminarProducto=(id)=>{
     socket.emit("eliminarProducto", id);
-}
-
+};
