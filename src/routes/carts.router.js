@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const CartManager = require("../managers/cart-manager.js")
-const cartManager = new CartManager("./src/data/carts.json");
+const CartManager = require("../dao/db/cart-manager-db.js")
+const cartManager = new CartManager();
 
 router.post("/" , async (req, res)=>{
     try {
@@ -14,7 +14,7 @@ router.post("/" , async (req, res)=>{
 });
 
 router.get("/:cid" , async (req, res) =>{
-    const carritoId = parseInt(req.params.cid);
+    const carritoId = req.params.cid;
 
     try {
         const carritoBuscado = await cartManager.getCartById(carritoId);
@@ -27,9 +27,9 @@ router.get("/:cid" , async (req, res) =>{
 
 //agergar productos al carrito
 router.post("/:cid/product/:pid" , async (req, res) =>{
-    const carritoId = parseInt(req.params.cid);
-    const productoId = req.params.pid;
-    const quantity = req.body.quantity || 1 ; 
+    let carritoId =req.params.cid;
+    let productoId = req.params.pid;
+    let quantity = req.body.quantity || 1 ; 
 
     try {
         const carritoNew = await cartManager.addProductsCart(carritoId, productoId, quantity);
@@ -39,4 +39,5 @@ router.post("/:cid/product/:pid" , async (req, res) =>{
         res.status(500).send("Error al ingresar un producto, error del servidor")
     }
 })
+
 module.exports = router; 

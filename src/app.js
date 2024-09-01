@@ -12,10 +12,11 @@ const viewsRouter = require("./routes/views.router.js");
 const app = express(); 
 const PUERTO = 8080;
 const productsRouter = require("./routes/products.router.js");
-// products es con model y el productRouter (sin s), utiliza para api products
+
+require("./database.js"); 
+
 
 //socket
-
 const socket = require("socket.io");
 
 
@@ -45,7 +46,7 @@ const httpServer = app.listen(PUERTO, ()=>{
 });
 
 //traigo metemodos de productmanager
-const ProductManager = require("./managers/product-manager.js");
+/* const ProductManager = require("./dao/fs/managers/product-manager.js");
 const manager = new ProductManager("./src/data/productos.json");
 
 
@@ -79,9 +80,4 @@ socket.on("recargarProductos", async () => {
     await manager.cargarProductosDesdeStock(stockPath);
     io.sockets.emit("productos", await manager.getProducts());
 });
-})
-
-//conexion con mongodb atlas
-mongoose.connect("mongodb+srv://pablofontanaCH:coderhouse@cluster0.qyda2.mongodb.net/MiProyecto-BackEnd?retryWrites=true&w=majority&appName=Cluster0")
-.then(()=> console.log("Nos conectamos bien a la base de datos"))
-.catch(()=> console.log("Pusiste expectativa muy altas, FALLO data base"))
+}) */
