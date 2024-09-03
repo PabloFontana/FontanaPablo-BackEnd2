@@ -48,27 +48,7 @@ class CartManager {
             console.log("Error al agregar un producto al carrito");
         }
     }
-    //actualizar carrito
-    async updateCart(carritoId, productoId, quantity) {
-        try {
-          const upCart = await CartModel.findOneAndUpdate(
-            { _id: carritoId, "products.product": productoId },
-            { $set: { "products.$.quantity": quantity } },
-            { new: true }
-        ).populate('products.product');
-
-        if (!cart) {
-            console.log('Product not found in cart');
-            throw new Error('Product not found in cart');
-        }
-
-        console.log('Product quantity updated');
-        return upCart;
-    } catch (error) {
-        console.log("Error updating product quantity", error);
-        throw error;
-    }
-    }
+    
 
       async getAllCarts() {
         try {
@@ -113,6 +93,29 @@ class CartManager {
             throw error;
         }
     }
+
+    //actualizar carrito
+    async updateCart(carritoId, productoId, quantity) {
+        try {
+          const upCart = await CartModel.findOneAndUpdate(
+            { _id: carritoId, "products.product": productoId },
+            { $set: { "products.$.quantity": quantity } },
+            { new: true }
+        ).populate('products.product');
+
+        if (!upCart) {
+            console.log('Product not found in cart');
+            throw new Error('Product not found in cart');
+        }
+
+        console.log('Product quantity updated');
+        return upCart;
+    } catch (error) {
+        console.log("Error updating product quantity", error);
+        throw error;
+    }
+    }
+
     async emptyCart(carritoId) {
         try {
             await CartModel.findByIdAndUpdate(

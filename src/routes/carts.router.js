@@ -10,7 +10,7 @@ router.post("/" , async (req, res)=>{
         const nuevoCarrito = await cartManager.crearCarrito();
         res.json(nuevoCarrito);
         } catch (error) {
-        res.status(500).send('Error del server');
+        res.status(500).send('Error del server');;
         
     }
 });
@@ -69,6 +69,11 @@ router.delete("/:cid/product/:pid", async (req, res) => {
     }
 });
 
+
+
+
+
+
 // Actualizar la cantidad de un producto en un carrito
 router.put("/:cid/product/:pid", async (req, res) => {
     const carritoId = req.params.cid;
@@ -80,8 +85,8 @@ router.put("/:cid/product/:pid", async (req, res) => {
     }
 
     try {
-        const updateCart = await cartManager.updateCart(carritoId, productoId, quantity);
-        res.json(updateCart.products);
+        const updatedCart = await cartManager.updateCart(carritoId, productoId, quantity);
+        res.json(updatedCart.products);
     } catch (error) {
         console.error("Error updating product quantity in cart", error);
         res.status(500).json({ error: "Internal server error" });
