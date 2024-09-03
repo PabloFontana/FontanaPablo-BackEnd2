@@ -1,14 +1,12 @@
 /* import express from "express"; */
 const exphbs = require("express-handlebars");
-
 const express = require("express"); 
-
 const mongoose = require("mongoose");
-
-
 const productRouter = require("./routes/products.router.js");
 const cartRouter = require("./routes/carts.router.js");
 const viewsRouter = require("./routes/views.router.js");
+
+
 const app = express(); 
 const PUERTO = 8080;
 const productsRouter = require("./routes/products.router.js");
@@ -19,13 +17,10 @@ require("./database.js");
 //socket
 const socket = require("socket.io");
 
-
 //handlebars
-
 app.engine("handlebars" , exphbs.engine());
 app.set("view engine", "handlebars");
 app.set("views", "./src/views");
-
 
 
 //middleware
@@ -81,3 +76,4 @@ socket.on("recargarProductos", async () => {
     io.sockets.emit("productos", await manager.getProducts());
 });
 }) */
+

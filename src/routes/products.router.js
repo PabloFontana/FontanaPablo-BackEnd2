@@ -5,9 +5,41 @@ const manager = new ProductManager();
 
 //lista de prod
 router.get("/", async (req, res) => {
-    const arrayProductos = await manager.getProducts();
-    res.send(arrayProductos);
+  try {
+    const { limit = 10, page = 1, sort = 'asc', query = '' } = req.query;
+    const products = await manager.getProducts({
+      limit: parseInt(limit),
+      page: parseInt(page),
+      sort,
+      query,
+  });
+  res.json({
+    status: 'success',
+    payload: products.docs,
+    totalPages: products.totalPages,
+    prevPage: products.prevPage,
+    nextPage: products.nextPage,
+    page: products.page,
+    hasPrevPage: products.hasPrevPage,
+    hasNextPage: products.hasNextPage,
+    prevLink: products.prevLink,
+    nextLink: products.nextLink,
 });
+
+  } catch (error) {
+    console.error("Error getting products", error);
+        res.status(500).json({
+            status: 'error',
+            error: "Internal server error"
+  })
+}
+
+});
+
+
+
+
+
 
 //Busqueda de producto por ID
 

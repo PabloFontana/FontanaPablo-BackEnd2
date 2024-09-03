@@ -51,14 +51,77 @@ class ProductManager {
     }
   }
 
-  async getProducts() {
+  /* async getProducts() {
     try {
-      const arrayProductos = await ProductsModel.find();
+      const arrayProductos = await ProductsModel.find().lean();
       return arrayProductos;
     } catch (error) {
       console.log("Error al leer el archivo", error);
+      throw error; 
+    }
+  } */
+
+  async getProducts({ limit = 10, page = 1, sort, query } = {}) {
+    try {
+      const skip = (page - 1) * limit;
+
+      // Opciones de consulta para filtro por categoría o estado
+      let queryOptions = {};
+      if (query) {
+        queryOptions = {
+          $or: [
+            { category: { $regex: query, $options: "i" } },
+            { status: query.toLowerCase() === "available" ? true : false },
+          ],
+        };
+      }
+
+      // Opciones de ordenamiento
+      const sortOptions = {};
+      if (sort) {
+        if (sort === "asc" || sort === "desc") {
+          sortOptions.price = sort === "asc" ? 1 : -1;
+        }
+      }
+
+      // Consulta a la base de datos
+      const products = await ProductsModel.find(queryOptions)
+        .sort(sortOptions)
+        .skip(skip)
+        .limit(limit);
+
+      // Contar productos totales
+      const totalProducts = await ProductsModel.countDocuments(queryOptions);
+
+      const totalPages = Math.ceil(totalProducts / limit);
+      const hasPrevPage = page > 1;
+      const hasNextPage = page < totalPages;
+
+      return {
+        docs: products,
+        totalPages,
+        prevPage: hasPrevPage ? page - 1 : null,
+        nextPage: hasNextPage ? page + 1 : null,
+        page,
+        hasPrevPage,
+        hasNextPage,
+        prevLink: hasPrevPage
+          ? `/api/products?limit=${limit}&page=${
+              page - 1
+            }&sort=${sort}&query=${query}`
+          : null,
+        nextLink: hasNextPage
+          ? `/api/products?limit=${limit}&page=${
+              page + 1
+            }&sort=${sort}&query=${query}`
+          : null,
+      };
+    } catch (error) {
+      console.log("Error getting products", error);
+      throw error;
     }
   }
+  
 
   async getProductById(id) {
     try {
