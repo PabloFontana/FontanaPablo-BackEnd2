@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const productRouter = require("./routes/products.router.js");
 const cartRouter = require("./routes/carts.router.js");
 const viewsRouter = require("./routes/views.router.js");
+const cookieParser = require("cookie-parser");
+const passport = require("passport");
 
 
 const app = express(); 
@@ -28,6 +30,7 @@ app.use(express.json());
 app.use(express.static("./src/public"));
 app.use(express.static("./src/public"));
 app.use(express.urlencoded({extended:true}));
+app.use(cookieParser());
 
 //routes
 app.use("/api/products", productRouter);
