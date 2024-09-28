@@ -1,5 +1,9 @@
 <h1>Bievenido a SportShop, {{usuario}}!!</h1>
 
+<form action="/api/sessions/logout" method="POST">
+    <button type="submit"> Logout </button>
+</form>
+
 <div>
 
     {{#each productos}}

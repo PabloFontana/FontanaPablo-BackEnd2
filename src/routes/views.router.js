@@ -42,10 +42,7 @@ router.get("/products", async (req,res)=>{
     
     res.status(500).send("Error al cargar productos desde get")
     throw error;
-    
    }
-   
-   
 });
  
 
@@ -53,6 +50,15 @@ router.get("/products", async (req,res)=>{
 router.get("/realTimeProducts", (req, res) =>{
     res.render("realTimeProducts");
 });
+
+
+router.get("/register", (req, res) => {
+    res.render("register");
+});
+
+router.get("/login", (req, res) => {
+    res.render("login");
+})
 
 
 module.exports = router; 
