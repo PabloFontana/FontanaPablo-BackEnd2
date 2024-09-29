@@ -77,7 +77,7 @@ router.post("/logout", (req, res) => {
 })  
 
 //current
-router.get("/current", passport.authenticate("jwt", {session:false}), (req,res)=> {
+router.get("/current", passport.authenticate("current", {session:false}), (req,res)=> {
 
     res.render("home", {usuario: req.user.usuario})
 })
@@ -93,3 +93,5 @@ router.get("/admin", passport.authenticate("current", {session:false}), (req, re
 })
 
 module.exports = router;
+
+
