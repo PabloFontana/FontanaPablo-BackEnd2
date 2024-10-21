@@ -1,4 +1,4 @@
-<h1>Bievenido a SportShop, {{usuario}}!!</h1>
+{{!-- <h1>Bievenido a SportShop, {{usuario}}!!</h1>
 
 <form action="/api/sessions/logout" method="POST">
     <button type="submit"> Logout </button>
@@ -11,7 +11,7 @@
             <p> {{this.title}} </p>
             <p> {{this.description}} </p>
             <p>Stock: {{this.stock}}</p>
-            <p>${{this.price}} </p>
+            <p>Precio: ${{this.price}} </p>
             <button>Agregar al carrito</button>
         </div>
     {{/each}}
@@ -23,4 +23,31 @@
     <a href="/products?page={{nextPage}}"> Siguiente </a>
     {{/if}}
     <p> Pagina {{currentPage}} de {{totalPages}}</p>
+</div> --}}
+<h1>Bienvenido a SportShop, {{usuario}}!!</h1>
+
+<form action="/api/sessions/logout" method="POST">
+    <button type="submit">Logout</button>
+</form>
+
+<div>
+    {{#each productos}}
+        <div>
+            <p>{{this.title}}</p>
+            <p>{{this.description}}</p>
+            <p>Stock: {{this.stock}}</p>
+            <p>Precio: ${{this.price}}</p>
+            <button>Agregar al carrito</button>
+        </div>
+    {{/each}}
+
+    {{#if hasPrevPage}}
+        <a href="/current?page={{prevPage}}">Anterior</a>
+    {{/if}}
+
+    {{#if hasNextPage}}
+        <a href="/current?page={{nextPage}}">Siguiente</a>
+    {{/if}}
+
+    <p>Página {{currentPage}} de {{totalPages}}</p>
 </div>

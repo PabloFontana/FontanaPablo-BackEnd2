@@ -31,7 +31,7 @@ const renderProductos=(productos)=>{
         <p>${item.id}</p>
         <p>${item.title}</p>
         <p>$${item.price}</p>
-        <button>Eliminar</button>
+        <button> Eliminar </button>
         `
         contenedorProductos.appendChild(card);
 
