@@ -24,7 +24,7 @@
     {{/if}}
     <p> Pagina {{currentPage}} de {{totalPages}}</p>
 </div> --}}
-<h1>Bienvenido a SportShop, {{usuario}}!!</h1>
+<h1>Bienvenido a SportShop, {{user.email}}!!</h1>
 
 <form action="/api/sessions/logout" method="POST">
     <button type="submit">Logout</button>
