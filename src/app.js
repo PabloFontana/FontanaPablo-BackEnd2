@@ -42,6 +42,7 @@ app.use(passport.initialize());
 //routes
 app.use("/api/products", productRouter);
 app.use("/api/carts", cartRouter);
+app.use("/carts", cartRouter);
 app.use("products", productRouter);
 app.use("/api/sessions", userRouter);
 app.use("/", viewsRouter);

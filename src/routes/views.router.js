@@ -6,14 +6,7 @@ const manager = new ProductManager("");
 
 // ruta de los productos con express-handlebars
 router.get("/products", async (req,res)=>{
-    
-   /*  try {
-        const productos = await manager.getProducts();
-        res.render("home", {productos});
-    } catch (error) {
-        res.status(500).send('Error en el servidor');
-    } */
-   try { 
+    try { 
     const { page = 1, limit = 5, sort = 'asc', query = '' } = req.query;
     const validSort = ['asc', 'desc'].includes(sort) ? sort : 'asc';
     
